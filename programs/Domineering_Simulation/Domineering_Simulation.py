@@ -22,12 +22,12 @@ def main():
     with open('graphs.txt', 'r') as document:
         for line in document:
             line = line.split()
-            # if not line:
-            #     continue
+            if not line:
+                continue
             graph[line[0]] = line[1:]
 
-    # print(graph)
-    partition = check_partition_existence(graph, '-1-1', '05')
+    print(graph)
+    partition = check_partition_existence(graph, 'E', 'W')
     print(f"partition: {partition}")
 
 
