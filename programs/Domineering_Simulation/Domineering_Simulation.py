@@ -26,9 +26,18 @@ def main():
                 continue
             graph[line[0]] = line[1:]
 
-    print(graph)
+    print(graph, end='\n\n')
+
     partition = check_partition_existence(graph, 'E', 'W')
-    print(f"partition: {partition}")
+    if partition:
+        partition = check_partition_existence(graph, 'S', 'N')
+        if partition:
+            print("This board is partitioned into 4 quadrants")
+        else:
+            print("No North-South partition")
+    else:
+        print("No East-West partition")
+
 
 
 if __name__ == '__main__':
