@@ -1,19 +1,23 @@
 def vertical_possibilities(partition):
     sum = 0
-    for i in range(1, len(partition)):
-        for j in range(0, len(partition[0])):
-            if partition[i][j] == "" and partition[i-1][j] == "":
+    copy = [list[:] for list in partition]  # copy matrix without sharing a reference
+    for i in range(1, len(copy)):
+        for j in range(0, len(copy[0])):
+            if copy[i][j] != 'X' and copy[i-1][j] != 'X':
                 sum += 1
-                partition[i][j], partition[i-1][j] = 'X', 'X'
+                copy[i][j], copy[i-1][j] = 'X', 'X'
+    print(sum)
     return sum
 
 def horizontal_possibilities(partition):
     sum = 0
-    for i in range(0, len(partition)):
-        for j in range(1, len(partition[0])):
-            if partition[i][j] == "" and partition[i][j-1] == "":
+    copy = [list[:] for list in partition]  # copy matrix without sharing a reference
+    for i in range(0, len(copy)):
+        for j in range(1, len(copy[0])):
+            if copy[i][j] != 'X' and copy[i][j-1] != 'X':
                 sum -= 1
-                partition[i][j], partition[i-1][j] = 'X', 'X'
+                copy[i][j], copy[i-1][j] = 'X', 'X'
+    print(sum)
     return sum
 
 def calc_possibilities(partition):
