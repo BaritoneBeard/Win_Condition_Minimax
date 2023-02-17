@@ -25,7 +25,6 @@ def fill_graph_and_board(file, graph, board):
                     x,y = int(move[:1]), int(move[1:])
                     if board[x][y] != 'X':
                         board[x][y] = 'X'
-                        print(x,y)
     return graph
 
 

@@ -1,7 +1,6 @@
 from programs.Domineering_Simulation.helpers.check_partition_existence import check_partition_existence
 from programs.Domineering_Simulation.helpers.check_graph_possibilities import calc_possibilities
 from programs.Domineering_Simulation.helpers.graph_and_board_computation import *
-from copy import deepcopy
 
 def main():
     graph, board = generate_empty_graph_and_matrix(8,8)
