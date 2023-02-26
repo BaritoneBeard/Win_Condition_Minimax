@@ -19,8 +19,8 @@ def main():
 
     add_move(graph = graph, board = board, move = ['02','12'])
 
-    print(graph, end='\n\n')
-    print(board)
+    # print(graph, end='\n\n')
+    # print(board)
 
     print(calc_possibilities(board))
 
