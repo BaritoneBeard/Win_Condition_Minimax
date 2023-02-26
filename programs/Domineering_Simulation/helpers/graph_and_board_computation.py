@@ -25,13 +25,15 @@ def fill_graph_and_board(file, graph, board):
                     x,y = int(move[:1]), int(move[1:])
                     if board[x][y] != 'X':
                         board[x][y] = 'X'
-    return graph
+    return graph, board
 
 
 # :param: move should be a tuple of two digit numbers (the first digit may be 0)
-def add_move(graph, board, move):
-    graph[move[0]].append(move[1])
-    graph[move[1]].append(move[0])
+def add_move(move, graph=None, board=None):
+    if graph != None:
+        graph[move[0]].append(move[1])
+        graph[move[1]].append(move[0])
 
-    board[int(move[0][:1])][int(move[0][1:])] = 'X'
-    board[int(move[1][:1])][int(move[1][1:])] = 'X'
+    if board != None:
+        board[int(move[0][:1])][int(move[0][1:])] = 'X'
+        board[int(move[1][:1])][int(move[1][1:])] = 'X'
