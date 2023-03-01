@@ -4,10 +4,10 @@ from programs.Domineering_Simulation.helpers.graph_and_board_computation import 
 from programs.Domineering_Simulation.Minimax import *
 
 
-
 def main():
     file = 'graphs.txt'
-    graph, board = generate_empty_graph_and_matrix(8,8)
+    graph = generate_empty_8x8_graph()
+    board = generate_empty_8x8_board()
     # graph = fill_graph(file = file, graph = graph)
     board = fill_board(file = file, board = board)
     build_graph_from_board(graph=graph, board=board)
