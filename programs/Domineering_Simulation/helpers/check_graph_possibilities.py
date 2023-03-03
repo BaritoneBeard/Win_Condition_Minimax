@@ -4,7 +4,7 @@ def possible_vertical_moves(board):
     possible_moves = []
     for i in range(1, len(board)):
         for j in range(0, len(board[0])):
-            if board[i][j] != 'X' and board[i - 1] != 'X':
+            if board[i][j] != 'X' and board[i - 1][j] != 'X':
                 possible_moves.append([str(i) + str(j), str(i - 1) + str(j)])
     return possible_moves
 

@@ -50,24 +50,36 @@ def add_node(graph, node1, node2):
 
 
 def build_graph_from_board(graph, board):
-    if board[0][0] == 'X':
-        if board[0][1] == 'X':
-            add_node(graph, '00', '01')
-        if board[1][0] == 'X':
-            add_node(graph, '00', '10')
-
-    for i in range(1, len(board)):
-        for j in range(1, len(board[i])):
+    for i in range(1, len(board)-1):
+        for j in range(1, len(board[i])-1):
             if board[i][j] == 'X':
                 node1 = str(i) + str(j)
+                if board[i-1][j-1] == 'X':
+                    node2= str(i-1) + str(j-1)
+                    add_node(graph, node1, node2)
+                if board[i-1][j] == 'X':
+                    node2= str(i-1) + str(j)
+                    add_node(graph, node1, node2)
+                if board[i-1][j+1] == 'X':
+                    node2= str(i-1) + str(j+1)
+                    add_node(graph, node1, node2)
                 if board[i][j-1] == 'X':
                     node2= str(i) + str(j-1)
                     add_node(graph, node1, node2)
-                if board[i-1][j] == 'X':
-                    node2 = str(i-1) + str(j)
+                if board[i][j] == 'X':
+                    node2= str(i) + str(j)
                     add_node(graph, node1, node2)
-                if board[i-1][j-1] == 'X':
-                    node2 = str(i-1) + str(j-1)
+                if board[i][j+1] == 'X':
+                    node2= str(i) + str(j+1)
+                    add_node(graph, node1, node2)
+                if board[i+1][j-1] == 'X':
+                    node2= str(i+1) + str(j-1)
+                    add_node(graph, node1, node2)
+                if board[i+1][j] == 'X':
+                    node2= str(i+1) + str(j)
+                    add_node(graph, node1, node2)
+                if board[i+1][j+1] == 'X':
+                    node2= str(i+1) + str(j+1)
                     add_node(graph, node1, node2)
     return graph
 

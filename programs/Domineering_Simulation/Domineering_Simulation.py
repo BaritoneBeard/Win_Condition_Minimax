@@ -29,7 +29,7 @@ def main():
 
     # print(calc_possibilities(board))
     print()
-    Minimax(1,graph,board,2)
+    Minimax(player=1, graph=graph, board=board, depth=2)
     print()
     print_board(board)
     print(graph)
