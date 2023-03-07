@@ -12,9 +12,12 @@ class Minimax:
         self.board = board
         self.depth = depth
         self.first_move = ''
-        self.minimax(self.player, self.graph, self.board, self.depth)
+        self.alpha = -9999
+        self.beta = 9999
 
-    def minimax(self, player, graph, board, depth):
+        self.minimax(self.player, self.graph, self.board, self.depth, self.alpha, self.beta)
+
+    def minimax(self, player, graph, board, depth, alpha, beta):
 
         # The first Base Case: Stop if the board is partitioned
         if check_partition_existence(graph, 'E', 'W') is True and check_partition_existence(graph, 'N', 'S') is True:
@@ -36,7 +39,10 @@ class Minimax:
                 if depth == self.depth:
                     self.first_move = move
                 copy, new_graph = create_copies(board=board, move=move)
-                value = max(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1))
+                value = max(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1, alpha = alpha, beta = beta))
+                alpha = max(value, alpha)
+                if beta <= alpha:
+                    break
             return value
         else:
             value = 9999
@@ -45,7 +51,10 @@ class Minimax:
                 if depth == self.depth:
                     self.first_move = move
                 copy, new_graph = create_copies(board=board, move=move)
-                value = min(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1))
+                value = min(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1, alpha = alpha, beta = beta))
+                beta = min(value, beta)
+                if beta <= alpha:
+                    break
             return value
 
 

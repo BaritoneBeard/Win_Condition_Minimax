@@ -9,7 +9,7 @@ def main():
     board = fill_board(file=file, board=board)
     build_graph_from_board(graph=graph, board=board)
 
-    possible_first_moves = Minimax(AI_player=-1, graph=graph, board=board, depth=3).winning_moves
+    possible_first_moves = Minimax(AI_player=-1, graph=graph, board=board, depth=5).winning_moves
     filtered_list = {k for k in possible_first_moves if possible_first_moves[k] < 0}
     print(f"\nThe full list of moves and their values: {possible_first_moves} \n"
           f"List of moves which guarantee AI the win: {filtered_list}")
