@@ -29,10 +29,10 @@ def main():
 
     # print(calc_possibilities(board))
     print()
-    Minimax(player=1, graph=graph, board=board, depth=2)
-    print()
-    print_board(board)
-    print(graph)
+    print(f"\nlist of partitioned values:{Minimax(AI_player=-1, graph=graph, board=board, depth=2).testing}")
+    # print()
+    # print_board(board)
+    # print(graph)
 
 if __name__ == '__main__':
     main()

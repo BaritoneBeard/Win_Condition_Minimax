@@ -8,14 +8,31 @@ from programs.Domineering_Simulation.helpers.graph_and_board_computation import 
     generate_empty_8x8_graph, \
     print_board
 
-def Minimax(player, graph, board, depth):
-    partition = False
+class Minimax:
+    def __init__(self, AI_player, graph, board, depth):
+        self.winning_moves = {}
+        self.testing = []
+        self.player = AI_player
+        self.graph = graph
+        self.board = board
+        self.depth = depth
+        minimax(self, self.player, self.graph, self.board, self.depth)
+
+def minimax(self, player, graph, board, depth):
+
+    # The first Base Case: Stop if the board is partitioned
     if check_partition_existence(graph, 'E', 'W') is True and check_partition_existence(graph, 'N', 'S') is True:
-        partition = True
         print("Partitioned!")
         print_board(board)
-    if depth <= 0 or partition is True:
+        calculation = calc_possibilities(board)
+        self.testing.append(calculation)
+        return calculation
+
+    # Worst case base case: If no partitions are found, might as well return something
+    if depth <= 0:
         return calc_possibilities(board)
+
+    # If depth > 0 and no partitions are found, propose a series of moves
     if player == 1:
         value = -9999
         possible_moves = possible_vertical_moves(board)
@@ -24,8 +41,7 @@ def Minimax(player, graph, board, depth):
             add_move(move=move, board=copy)
             new_graph = generate_empty_8x8_graph()
             build_graph_from_board(graph=new_graph, board=copy)
-            value = max(value, Minimax(player * -1, new_graph, copy, depth - 1))
-
+            value = max(value, minimax(self, player * -1, new_graph, copy, depth - 1))
         return value
     else:
         value = 9999
@@ -35,5 +51,5 @@ def Minimax(player, graph, board, depth):
             add_move(move=move, board=copy)
             new_graph = generate_empty_8x8_graph()
             build_graph_from_board(graph=new_graph, board=copy)
-            value = min(value, Minimax(player * -1, new_graph, copy, depth - 1))
+            value = min(value, minimax(self, player * -1, new_graph, copy, depth - 1))
         return value
