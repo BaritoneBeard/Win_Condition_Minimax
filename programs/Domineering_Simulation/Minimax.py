@@ -1,12 +1,7 @@
 from programs.Domineering_Simulation.helpers.check_partition_existence import check_partition_existence
-from programs.Domineering_Simulation.helpers.check_graph_possibilities import calc_possibilities, \
-    possible_horizontal_moves, \
-    possible_vertical_moves
-from programs.Domineering_Simulation.helpers.graph_and_board_computation import copy_list, \
-    add_move, \
-    build_graph_from_board, \
-    generate_empty_8x8_graph, \
-    print_board
+from programs.Domineering_Simulation.helpers.check_graph_possibilities import *
+from programs.Domineering_Simulation.helpers.graph_and_board_computation import *
+
 
 class Minimax:
     def __init__(self, AI_player, graph, board, depth):
