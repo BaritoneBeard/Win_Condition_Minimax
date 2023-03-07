@@ -25,6 +25,7 @@ def Minimax(player, graph, board, depth):
             new_graph = generate_empty_8x8_graph()
             build_graph_from_board(graph=new_graph, board=copy)
             value = max(value, Minimax(player * -1, new_graph, copy, depth - 1))
+
         return value
     else:
         value = 9999
@@ -32,5 +33,7 @@ def Minimax(player, graph, board, depth):
         for move in possible_moves:
             copy = copy_list(board)
             add_move(move=move, board=copy)
-            value = min(value, Minimax(player * -1, graph, copy, depth - 1))
+            new_graph = generate_empty_8x8_graph()
+            build_graph_from_board(graph=new_graph, board=copy)
+            value = min(value, Minimax(player * -1, new_graph, copy, depth - 1))
         return value
