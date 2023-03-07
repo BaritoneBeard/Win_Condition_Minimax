@@ -8,31 +8,13 @@ def main():
     file = 'graphs.txt'
     graph = generate_empty_8x8_graph()
     board = generate_empty_8x8_board()
-    # graph = fill_graph(file = file, graph = graph)
-    board = fill_board(file = file, board = board)
+    board = fill_board(file=file, board=board)
     build_graph_from_board(graph=graph, board=board)
 
-    partition = check_partition_existence(graph, 'E', 'W')
-    if partition:
-        partition = check_partition_existence(graph, 'S', 'N')
-        if partition:
-            print("This board is partitioned into 4 quadrants")
-        else:
-            print("No North-South partition")
-    else:
-        print("No East-West partition")
-
-    # print(graph, end='\n\n')
-    # print(board)
-    print(graph)
-    print_board(board)
-
-    # print(calc_possibilities(board))
-    print()
-    print(f"\nlist of partitioned values:{Minimax(AI_player=-1, graph=graph, board=board, depth=2).testing}")
-    # print()
-    # print_board(board)
-    # print(graph)
+    possible_first_moves = Minimax(AI_player=-1, graph=graph, board=board, depth=3).winning_moves
+    filtered_list = {k for k in possible_first_moves if possible_first_moves[k] < 0}
+    print(f"\nThe full list of moves and their values: {possible_first_moves} \n"
+          f"List of moves which guarantee AI the win: {filtered_list}")
 
 if __name__ == '__main__':
     main()

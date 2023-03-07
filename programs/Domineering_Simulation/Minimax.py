@@ -16,40 +16,47 @@ class Minimax:
         self.graph = graph
         self.board = board
         self.depth = depth
-        minimax(self, self.player, self.graph, self.board, self.depth)
+        self.first_move = ''
+        self.minimax(self.player, self.graph, self.board, self.depth)
 
-def minimax(self, player, graph, board, depth):
+    def minimax(self, player, graph, board, depth):
 
-    # The first Base Case: Stop if the board is partitioned
-    if check_partition_existence(graph, 'E', 'W') is True and check_partition_existence(graph, 'N', 'S') is True:
-        print("Partitioned!")
-        print_board(board)
-        calculation = calc_possibilities(board)
-        self.testing.append(calculation)
-        return calculation
+        # The first Base Case: Stop if the board is partitioned
+        if check_partition_existence(graph, 'E', 'W') is True and check_partition_existence(graph, 'N', 'S') is True:
+            print("Partitioned!")
+            print_board(board)
+            calculation = calc_possibilities(board)
+            self.winning_moves[str(self.first_move)] = calculation
+            return calculation
 
-    # Worst case base case: If no partitions are found, might as well return something
-    if depth <= 0:
-        return calc_possibilities(board)
+        # Worst case base case: If no partitions are found, might as well return something
+        if depth <= 0:
+            return calc_possibilities(board)
 
-    # If depth > 0 and no partitions are found, propose a series of moves
-    if player == 1:
-        value = -9999
-        possible_moves = possible_vertical_moves(board)
-        for move in possible_moves:
-            copy = copy_list(board)
-            add_move(move=move, board=copy)
-            new_graph = generate_empty_8x8_graph()
-            build_graph_from_board(graph=new_graph, board=copy)
-            value = max(value, minimax(self, player * -1, new_graph, copy, depth - 1))
-        return value
-    else:
-        value = 9999
-        possible_moves = possible_horizontal_moves(board)
-        for move in possible_moves:
-            copy = copy_list(board)
-            add_move(move=move, board=copy)
-            new_graph = generate_empty_8x8_graph()
-            build_graph_from_board(graph=new_graph, board=copy)
-            value = min(value, minimax(self, player * -1, new_graph, copy, depth - 1))
-        return value
+        # If depth > 0 and no partitions are found, propose a series of moves
+        if player == 1:
+            value = -9999
+            possible_moves = possible_vertical_moves(board)
+            for move in possible_moves:
+                if depth == self.depth:
+                    self.first_move = move
+                copy, new_graph = create_copies(board=board, move=move)
+                value = max(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1))
+            return value
+        else:
+            value = 9999
+            possible_moves = possible_horizontal_moves(board)
+            for move in possible_moves:
+                if depth == self.depth:
+                    self.first_move = move
+                copy, new_graph = create_copies(board=board, move=move)
+                value = min(value, self.minimax(player = player * -1, graph = new_graph, board = copy, depth = depth - 1))
+            return value
+
+
+def create_copies(board, move):
+    copy = copy_list(board)
+    add_move(move=move, board=copy)
+    new_graph = generate_empty_8x8_graph()
+    build_graph_from_board(graph=new_graph, board=copy)
+    return copy, new_graph
