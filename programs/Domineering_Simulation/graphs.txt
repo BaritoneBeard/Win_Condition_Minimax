@@ -1,34 +1,20 @@
-40 41
-41 42 40
-42 43 41
-43 44 42
-44 45 43
-45 46 44
-34 44 24
-44 54 34 45 43
-54 64 44
-64 74 54
-74 64
+26 36
+46 45
+66 56
+01 02
+67 57
+24 25
+12 22
+51 52
+70 60
 
-
-
-# Above is a board which missing a partioning move
+# Above is a board with random moves
 
 40 41
-41 42 40
-42 43 41
-43 44 42
-44 45 43
-45 46 44
-46 47 45
-47 46
-04 14
-14 24 04
-24 34 14
-34 44 24
-44 54 34 45 43
-54 64 44
-64 74 54
-74 64
+42 43
+44 45
+34 24
+54 64
 
-#Above is a partitioned
+#Above is a board with a very elementary assortment of moves
+

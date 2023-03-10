@@ -30,10 +30,9 @@ def fill_board(file, board):
             if not line:
                 break
             for move in line:
-                if move.isnumeric() and line[0].isnumeric():
-                    x, y = int(move[:1]), int(move[1:])
-                    if board[x][y] != 'X':
-                        board[x][y] = 'X'
+                x, y = int(move[:1]), int(move[1:])
+                if board[x][y] != 'X':
+                    board[x][y] = 'X'
     return board
 
 

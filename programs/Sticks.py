@@ -1,7 +1,7 @@
 from random import randint
 
+# Normally global variables are bad form, but this is a very light implementation
 MNswitch = False
-
 
 def player_turn(sticks: int):
     print(f'\n there are {sticks} sticks reamining')
