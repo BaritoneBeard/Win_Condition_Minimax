@@ -12,17 +12,6 @@ def print_board(board):
         print()
 
 
-def fill_graph(file, graph):
-    with open(file, 'r') as document:
-        for line in document:
-            line = line.split()
-            if not line:
-                break
-            for i in range(1, len(line)):
-                graph[line[0]].append(line[i])
-    return graph
-
-
 def fill_board(file, board):
     with open(file, 'r') as document:
         for line in document:
