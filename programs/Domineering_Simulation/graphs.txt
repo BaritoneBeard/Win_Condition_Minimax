@@ -5,10 +5,20 @@
 67 57
 24 25
 12 22
+
+# Above is a board with random moves in which either player could win
+
+26 36
+46 45
+66 56
+01 02
+67 57
+24 25
+12 22
 51 52
 70 60
 
-# Above is a board with random moves
+# Above is a modification of the previous board in which horizontal actually cannot win
 
 40 41
 42 43
