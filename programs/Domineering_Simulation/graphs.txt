@@ -20,6 +20,26 @@
 
 # Above is a modification of the previous board in which horizontal actually cannot win
 
+00 01
+06 07
+10 11
+12 13
+14 15
+20 30
+44 45
+46 47
+50 60
+51 61
+53 63
+55 65
+57 67
+70 71
+72 73
+76 77
+
+
+# testing for depth 5
+
 40 41
 42 43
 44 45
