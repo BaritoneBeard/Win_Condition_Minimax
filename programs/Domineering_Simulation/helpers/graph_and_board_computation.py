@@ -74,49 +74,42 @@ def build_graph_from_board(graph, board):
     return graph
 
 
-def generate_empty_8x8_board(rows=8, cols=8):
+def generate_empty_board(rows=8, cols=8):
     board = [[[] for x in range(cols)] for y in range(rows)]  # generate empty list for each key:value pair
     return board
 
 
-#  This can be made dynamic, but it's not a top priority
-def generate_empty_8x8_graph():
+def generate_empty_graph(height=8, length=8):
     graph = {}
 
-    for i in range(8):
-        for j in range(8):
+    str_height = str(height - 1)
+    str_length = str(length - 1)
+
+    graph['W'] = []
+    graph['S'] = []
+    graph['N'] = []
+    graph['E'] = []
+
+    for i in range(height):
+        str_i = str(i)
+        graph['W'].append(str_i + '0')  # '00', '10', '20' ...
+        graph[str_i + '0'] = ['W']
+        graph['E'].append(str_i + str_length)  # '07', '17', '27' ...
+        graph[str_i + str_length] = ['E']
+    for j in range(length):
+        str_j = str(j)
+        graph['N'].append('0' + str_j)  # '00', '01', '02' ...
+        graph['0' + str_j] = ['N']
+        graph['S'].append(str_height + str_j)  # '70', '71', '72' ...
+        graph[str_height + str_j] = ['S']
+
+    for i in range(1, height - 1):  # 1:-1?
+        for j in range(1, length - 1):
             graph[str(i) + str(j)] = []
 
-    graph['W'] = ['00', '10', '20', '30', '40', '50', '60', '70']
-    graph['E'] = ['07', '17', '27', '37', '47', '57', '67', '77']
-    graph['N'] = ['00', '01', '02', '03', '04', '05', '06', '07']
-    graph['S'] = ['70', '71', '72', '73', '74', '75', '76', '77']
     graph['00'] = ['W', 'N']
-    graph['01'] = ['N']
-    graph['02'] = ['N']
-    graph['03'] = ['N']
-    graph['04'] = ['N']
-    graph['05'] = ['N']
-    graph['06'] = ['N']
-    graph['07'] = ['N', 'E']
-    graph['17'] = ['E']
-    graph['27'] = ['E']
-    graph['37'] = ['E']
-    graph['47'] = ['E']
-    graph['57'] = ['E']
-    graph['67'] = ['E']
-    graph['77'] = ['E', 'S']
-    graph['76'] = ['S']
-    graph['75'] = ['S']
-    graph['74'] = ['S']
-    graph['73'] = ['S']
-    graph['72'] = ['S']
-    graph['71'] = ['S']
-    graph['70'] = ['S', 'W']
-    graph['60'] = ['W']
-    graph['50'] = ['W']
-    graph['40'] = ['W']
-    graph['30'] = ['W']
-    graph['20'] = ['W']
-    graph['10'] = ['W']
+    graph['0' + str_length] = ['N', 'E']
+    graph[str_height + str_length] = ['E', 'S']
+    graph[str_height + '0'] = ['S', 'W']
     return graph
+

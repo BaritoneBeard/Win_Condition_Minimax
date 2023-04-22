@@ -57,6 +57,6 @@ class Minimax:
 def create_copies(board, move):
     copy = copy_list(board)
     add_move(move=move, board=copy)
-    new_graph = generate_empty_8x8_graph()
+    new_graph = generate_empty_graph(len(board), len(board[0]))
     build_graph_from_board(graph=new_graph, board=copy)
     return copy, new_graph
