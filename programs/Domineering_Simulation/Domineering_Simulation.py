@@ -5,7 +5,7 @@ import time
 
 def main():
     file = 'graphs.txt'
-    height = 6
+    height = 5
     length = 5
     graph = generate_empty_graph(height=height, length=length)
     print(graph)
@@ -13,7 +13,7 @@ def main():
     board = fill_board(file=file, board=board)
     build_graph_from_board(graph=graph, board=board)
     print_board(board)
-    depth = 6
+    depth = 5
     player = 1
 
     if player == 1:
