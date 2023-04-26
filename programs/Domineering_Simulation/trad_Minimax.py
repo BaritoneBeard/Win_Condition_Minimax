@@ -14,19 +14,22 @@ class Minimax:
         self.alpha = -9999
         self.beta = 9999
         self.found_end = 0
+        self.winning_players = []
+        self.winning_boards = {}
 
         self.traditional_minimax(self.player, self.graph, self.board, self.depth, self.alpha, self.beta)
 
     def traditional_minimax(self, player, graph, board, depth, alpha, beta):
-        # Worst case base case: If no partitions are found, might as well return something
+        # Worst case base case: might as well return something.
         if depth <= 0:
-            return calc_possibilities(board)
+            return 0
 
         if player == 1:
             value = -9999
             possible_moves = possible_vertical_moves(board)
             if len(possible_moves) == 0:
                 self.found_end += 1
+                self.winning_players.append(player * -1)  # the current player has no more moves, so they lose
                 return alpha
             for move in possible_moves:
                 if depth == self.depth:
@@ -42,6 +45,7 @@ class Minimax:
             possible_moves = possible_horizontal_moves(board)
             if len(possible_moves) == 0:
                 self.found_end += 1
+                self.winning_players.append(player * -1)
                 return beta
             for move in possible_moves:
                 if depth == self.depth:

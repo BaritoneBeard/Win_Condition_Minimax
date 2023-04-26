@@ -5,8 +5,8 @@ import time
 
 def depth_comparison(graph, board, player = 1, stop = 99):
     depth = 1
-
     found_end = False
+
     while (found_end == False):
         game = Minimax(AI_player=player, graph=graph, board=board, depth=depth)
         game = game.winning_moves
@@ -47,9 +47,36 @@ def time_comparison(graph, board, player, depth):
               f"Win Condition Minimax: {wincon_minimax_time}")
 
 
+def accuracy_comparison(player, graph, board, depth):
+    boards_for_accuracy = Minimax(AI_player=player, graph=graph, board=board, depth=depth, accuracy=True).winning_boards
+    running_total = 0
+    count_of_wins = 0
+    wins = 0
+    for board in boards_for_accuracy:
+        winners = tm.Minimax(AI_player=player, graph=graph, board=board, depth=99).winning_players
+        debug = 0
+        debug_wins = 0
+        if player in winners:
+            wins += 1
+        for win in winners:
+            running_total += 1
+            debug += 1
+            if win == player:
+                count_of_wins += 1
+                debug_wins += 1
+    # Uncomment these for some more User-infromation
+    #         print()
+    #         print_board(board)
+    #         print(f"percent for this board: {(debug_wins/debug)*100}%")
+    #         print(winners)
+    accuracy = count_of_wins / running_total
+
+    print(f"Games in which Wincon Minimax declares certain victory: {len(boards_for_accuracy)}"
+          f"\n% of Games in which Traditional Minimax agrees with Wincon Minimax that there is a win: {wins / len(boards_for_accuracy) * 100}%"
+          f"\n% Overall accuracy of Wincon Minimax of all possible outcomes: {accuracy * 100}%")
 
 
-def main(time_test = False, depth_test = False):
+def main(player = 1, time_test = False, depth_test = False, accuracy_test = False):
     file = 'graphs.txt'
     height = 5
     length = 5
@@ -59,7 +86,6 @@ def main(time_test = False, depth_test = False):
     build_graph_from_board(graph=graph, board=board)
     print_board(board)
     depth = 5
-    player = 1
 
     print(graph)
     if player == 1:
@@ -68,10 +94,16 @@ def main(time_test = False, depth_test = False):
         print('\nAI player is Horizontal\n')
 
     if time_test == True:
+        print('\n----- Time Comparison -----\n')
         time_comparison(graph=graph, board=board, player=player, depth=depth)
 
     if depth_test == True:
+        print('\n----- Depth Comparison -----\n')
         depth_comparison(graph=graph, board=board, player=player)
 
+    if accuracy_test == True:
+        print('\n----- Accuracy Comparison -----\n')
+        accuracy_comparison(graph=graph, board=board, player=player, depth=depth)
+
 if __name__ == '__main__':
-    main(time_test = False, depth_test = True)
+    main(player = 1, time_test = True, depth_test = True, accuracy_test = True)

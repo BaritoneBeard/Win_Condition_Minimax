@@ -4,10 +4,11 @@ from programs.Domineering_Simulation.helpers.graph_and_board_computation import 
 
 
 class Minimax:
-    def __init__(self, AI_player, graph, board, depth):
+    def __init__(self, AI_player, graph, board, depth, accuracy = False):
         self.winning_moves = {}
         self.testing = []
         self.player = AI_player
+        self.original_player = AI_player
         self.graph = graph
         self.board = board
         self.depth = depth
@@ -15,6 +16,8 @@ class Minimax:
         self.alpha = -9999
         self.beta = 9999
         self.found_end = 0
+        self.accuracy = accuracy
+        self.winning_boards = []
 
         self.minimax(self.player, self.graph, self.board, self.depth, self.alpha, self.beta)
 
@@ -28,11 +31,19 @@ class Minimax:
             self.found_end += 1
             calculation = calc_possibilities(board)
             self.winning_moves[str(self.first_move)] = calculation
+            if self.accuracy == True:
+                if self.original_player == 1:  # want whether this is a vertical or horizontal player win
+                    if calculation > 0:
+                        self.winning_boards.append(board)
+                else:
+                    if calculation < 0:
+                        self.winning_boards.append(board)
+
             return calculation
 
         # Worst case base case: If no partitions are found, might as well return something
         if depth <= 0:
-            return calc_possibilities(board)
+            return 0
 
         # If depth > 0 and no partitions are found, propose a series of moves
         if player == 1:
